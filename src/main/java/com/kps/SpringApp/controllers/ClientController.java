@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,6 +81,30 @@ public class ClientController {
             String errorMessage = "Error al guardar el cliente en la base de datos: " + e.getMessage();
             System.out.println(errorMessage);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @PutMapping("/api/clients")
+    public ResponseEntity<Client> updateClient (@RequestBody Client client){
+        List<Client> clientes = clientRep.findAll();
+
+        for (Client cliente : clientes){
+            if(cliente.getDocumentNumber().equals(client.getDocumentNumber()) && cliente.getId() != client.getId()){
+                return ResponseEntity.badRequest().build();
+            }
+        }
+        Optional<Client> OpClient = clientRep.findById(client.getId());
+        if (OpClient.isPresent()){
+            Client ExClient = OpClient.get();
+            ExClient.setDocumentNumber(client.getDocumentNumber());
+            ExClient.setFirstName(client.getFirstName());
+            ExClient.setLastName(client.getLastName());
+            ExClient.setBirthDate(client.getBirthDate());
+            clientRep.save(ExClient);
+            return ResponseEntity.ok(ExClient);
+        }
+        else {
+            return ResponseEntity.notFound().build();
         }
     }
 
