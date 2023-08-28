@@ -2,6 +2,8 @@ package com.kps.SpringApp.controllers;
 
 import com.kps.SpringApp.entities.Client;
 import com.kps.SpringApp.repositories.ClientRepository;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
@@ -25,6 +27,7 @@ public class ClientController {
         this.clientRep = clientRep;
     }
 
+    @Operation(summary = "Find and get all the clients in BD")
     @GetMapping("/api/clients")
     public ResponseEntity<List<Client>> findClients()
     {
@@ -38,6 +41,7 @@ public class ClientController {
         }
     }
 
+    @Operation(summary = "Get a client by ID")
     @GetMapping("/api/clients/{id}")
     public ResponseEntity<Client> findClientbyID(@PathVariable Integer id) {
         try{
@@ -57,6 +61,7 @@ public class ClientController {
 
     }
 
+    @Operation(summary = "Create a client putting his all data")
     @PostMapping("/api/clients")
     public ResponseEntity<Client> createClient(@RequestBody Client client) {
         try {
@@ -79,6 +84,7 @@ public class ClientController {
         }
     }
 
+    @Operation(summary = "Update a client using his id for update his other values")
     @PutMapping("/api/clients")
     public ResponseEntity<Client> updateClient (@RequestBody Client client){
         try{
@@ -107,7 +113,7 @@ public class ClientController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
-
+    @Operation(summary = "Delete a client by his id")
     @DeleteMapping("/api/clients/{id}")
     public ResponseEntity<List<Client>> deleteClientByID(@PathVariable Integer id){
         try{

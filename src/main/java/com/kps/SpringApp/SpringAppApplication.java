@@ -2,10 +2,14 @@ package com.kps.SpringApp;
 
 import com.kps.SpringApp.entities.Client;
 import com.kps.SpringApp.repositories.ClientRepository;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cglib.core.Local;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Bean;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
@@ -43,8 +47,16 @@ public class SpringAppApplication {
 		cp.save(c1);
 		cp.save(c2);
 		cp.save(c3);
-
-
+	}
+	@Bean
+	public OpenAPI customOpenAPI(){
+		return new OpenAPI().info(
+				new Info()
+						.title("SpringApp Client API REST")
+						.version("0.1")
+						.description("Spring boot API Rest from Client by KPS")
+						.termsOfService("http://swagger.io/terms/")
+						.license(new License().name("Apache 2.0").url("http://springdoc.org")));
 	}
 
 }
