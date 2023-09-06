@@ -1,6 +1,7 @@
 package com.kps.SpringApp.controllers;
 
 import com.kps.SpringApp.entities.Client;
+import com.kps.SpringApp.entities.Profession;
 import com.kps.SpringApp.repositories.ClientRepository;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.Operation;
@@ -131,6 +132,36 @@ public class ClientController {
             String errorMessage = "Error al tratar de borrar un cliente de la base de datos" + e.getMessage();
             log.warn(errorMessage);
             return null;
+        }
+    }
+    @Operation(summary = "Change de state of a client")
+    @PutMapping("/api/clients/state/{id}")
+    public ResponseEntity<Client> changeStateClient(@PathVariable Integer id){
+        try {
+            Optional<Client> cl = clientRep.findById(id);
+            if (cl.isPresent()){
+                Client client = cl.get();
+                if (client.getState()){
+                    client.setState(false);
+                    clientRep.save(client);
+                    return ResponseEntity.ok(client);
+                }
+                else {
+                    client.setState(true);
+                    clientRep.save(client);
+                    return ResponseEntity.ok(client);
+                }
+
+            }
+            else {
+                return ResponseEntity.notFound().build();
+            }
+
+        }
+        catch (DataAccessException e){
+            String errorMessage = "Error al tratar de cambiar el estado de un cliente: " + e.getMessage();
+            log.warn(errorMessage);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 
