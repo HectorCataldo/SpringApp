@@ -12,6 +12,7 @@ public class Client {
     private String documentNumber;
     private String firstName;
     private String lastName;
+    private String secondLastName;
     private LocalDate birthDate;
     private String gender;
     private String nationality;
@@ -33,6 +34,7 @@ public class Client {
                   String documentNumber,
                   String firstName,
                   String lastName,
+                  String secondLastName,
                   LocalDate birthDate,
                   String gender,
                   String nationality,
@@ -45,6 +47,7 @@ public class Client {
         this.documentNumber = documentNumber;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.secondLastName = secondLastName;
         this.birthDate = birthDate;
         this.gender = gender;
         this.nationality = nationality;
@@ -143,13 +146,13 @@ public class Client {
         this.profession = profession;
     }
 
-    public Boolean getState() {
-        return state;
-    }
+    public Boolean getState() {return state;}
 
-    public void setState(Boolean state) {
-        this.state = state;
-    }
+    public void setState(Boolean state) {this.state = state;}
+
+    public String getSecondLastName() {return secondLastName;}
+
+    public void setSecondLastName(String secondLastName) {this.secondLastName = secondLastName;}
 }
 
 
