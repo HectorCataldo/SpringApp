@@ -105,7 +105,7 @@ public class SpringAppApplication {
 				"Romero",
 				fecha3,
 				"Masculino",
-				"Panamá",
+				"Panama",
 				"33564102",
 				"fede@example.es",
 				"Manuel Toledo 1306",
