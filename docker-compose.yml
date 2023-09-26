@@ -1,0 +1,18 @@
+version: '3.9'
+
+services:
+  spring-app:
+    container_name: spring_app
+    image: spring-java-app:1.0.0
+    build: .
+    ports:
+      - 8080:8080
+
+  react-app:
+    container_name: react_app
+    image: react-app:1.0.0
+    build: C:/Users/hecto/Desktop/React/ReactApp
+    ports:
+      - 5173:5173
+    volumes:
+      - C:/Users/hecto/Desktop/React/ReactApp/dist:/app/dist
