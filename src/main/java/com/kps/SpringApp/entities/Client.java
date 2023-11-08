@@ -1,6 +1,7 @@
 package com.kps.SpringApp.entities;
 
 import jakarta.persistence.*;
+import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 @Entity
@@ -26,6 +27,8 @@ public class Client {
 
     private Boolean state;
 
+    private String tipo_persona;
+    private LocalDate fechaCreacion;
 
     public Client() {
     }
@@ -42,7 +45,9 @@ public class Client {
                   String email,
                   String address,
                   Profession profession,
-                  Boolean state) {
+                  Boolean state,
+                  String tipo_persona,
+                  LocalDate fechaCreacion) {
         this.id = id;
         this.documentNumber = documentNumber;
         this.firstName = firstName;
@@ -55,7 +60,9 @@ public class Client {
         this.email = email;
         this.address = address;
         this.profession = profession;
-        this.state = true;
+        this.state = state;
+        this.tipo_persona = tipo_persona;
+        this.fechaCreacion = fechaCreacion;
     }
 
     public Integer getId() {
@@ -88,6 +95,14 @@ public class Client {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getSecondLastName() {
+        return secondLastName;
+    }
+
+    public void setSecondLastName(String secondLastName) {
+        this.secondLastName = secondLastName;
     }
 
     public LocalDate getBirthDate() {
@@ -146,13 +161,29 @@ public class Client {
         this.profession = profession;
     }
 
-    public Boolean getState() {return state;}
+    public Boolean getState() {
+        return state;
+    }
 
-    public void setState(Boolean state) {this.state = state;}
+    public void setState(Boolean state) {
+        this.state = state;
+    }
 
-    public String getSecondLastName() {return secondLastName;}
+    public String getTipo_persona() {
+        return tipo_persona;
+    }
 
-    public void setSecondLastName(String secondLastName) {this.secondLastName = secondLastName;}
+    public void setTipo_persona(String tipo_persona) {
+        this.tipo_persona = tipo_persona;
+    }
+
+    public LocalDate getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(LocalDate fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
+    }
 }
 
 
